@@ -1,0 +1,477 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap");
+@import "tailwindcss";
+
+/* ================= base ================= */
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #0a0d18;
+  color: #f6e7c3;
+  font-family: "Silkscreen", "Press Start 2P", monospace;
+  overflow: hidden;
+  -webkit-font-smoothing: none;
+  font-smooth: never;
+}
+img {
+  image-rendering: pixelated;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* ================= stage ================= */
+.stage {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #05070f;
+}
+.viewport {
+  position: relative;
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
+  container-type: size;
+  overflow: hidden;
+  box-shadow: 0 0 0 3px #1a1408, 0 0 0 6px #0a0d18;
+}
+.layer,
+.backdrop {
+  --u: calc(100cqw / 480);
+  --fs: max(6px, calc(var(--u) * 4.2));
+  --fs-sm: max(5px, calc(var(--u) * 3.4));
+  --fs-lg: max(8px, calc(var(--u) * 6));
+  font-size: var(--fs);
+}
+.layer {
+  position: absolute;
+  inset: 0;
+}
+.layer--ui {
+  pointer-events: none;
+}
+.layer--ui > * {
+  pointer-events: auto;
+}
+.world-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  display: block;
+}
+
+/* ================= sprites ================= */
+.sprite {
+  position: absolute;
+  image-rendering: pixelated;
+  transform-origin: 50% 100%;
+}
+.hit {
+  position: absolute;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+.clickable {
+  cursor: pointer;
+  transition: filter 90ms steps(2);
+}
+.clickable:hover {
+  filter: brightness(1.22) saturate(1.1);
+}
+.glow {
+  position: absolute;
+  image-rendering: pixelated;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  animation: flicker 2.4s steps(3) infinite;
+}
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  40% {
+    opacity: 0.95;
+  }
+  70% {
+    opacity: 0.62;
+  }
+}
+
+@keyframes bob {
+  0%,
+  49% {
+    transform: translateY(0);
+  }
+  50%,
+  100% {
+    transform: translateY(calc(var(--u) * -1));
+  }
+}
+.bob {
+  animation: bob 1.6s steps(1) infinite;
+}
+.bob-slow {
+  animation: bob 2.6s steps(1) infinite;
+}
+
+@keyframes hop {
+  0% {
+    transform: translateY(0) scaleY(1);
+  }
+  20% {
+    transform: translateY(0) scaleY(0.86) scaleX(1.1);
+  }
+  45% {
+    transform: translateY(calc(var(--u) * -4)) scaleY(1.08) scaleX(0.94);
+  }
+  75% {
+    transform: translateY(calc(var(--u) * -1)) scaleY(1);
+  }
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
+}
+.capy-react {
+  animation: hop 480ms steps(6) 1;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(calc(var(--u) * -12));
+    opacity: 0;
+  }
+}
+.pop {
+  animation: float-up 700ms steps(6) forwards;
+  pointer-events: none;
+  position: absolute;
+}
+
+/* ================= RPG frames ================= */
+.rpg {
+  position: relative;
+  background: #f6e7c3;
+  color: #2b1a10;
+  font-family: "Silkscreen", monospace;
+  padding: calc(var(--u) * 5);
+  box-shadow: 0 0 0 var(--u) #f6e7c3, 0 0 0 calc(var(--u) * 2) #2b1a10,
+    0 0 0 calc(var(--u) * 3) #c9a86a, 0 0 0 calc(var(--u) * 4) #2b1a10,
+    calc(var(--u) * 2) calc(var(--u) * 2) 0 calc(var(--u) * 4) rgba(14, 9, 4, 0.4);
+}
+.rpg--dark {
+  background: #221a33;
+  color: #f6e7c3;
+  box-shadow: 0 0 0 var(--u) #221a33, 0 0 0 calc(var(--u) * 2) #0f0a1a,
+    0 0 0 calc(var(--u) * 3) #c9a86a, 0 0 0 calc(var(--u) * 4) #0f0a1a,
+    calc(var(--u) * 2) calc(var(--u) * 2) 0 calc(var(--u) * 4) rgba(5, 3, 10, 0.5);
+}
+.rpg--wood {
+  background: #7d5027;
+  color: #ffeec9;
+  box-shadow: 0 0 0 var(--u) #a06c37, 0 0 0 calc(var(--u) * 2) #241408,
+    0 0 0 calc(var(--u) * 3) #c9a86a, 0 0 0 calc(var(--u) * 4) #241408;
+}
+
+/* ================= dialogue ================= */
+.dialogue {
+  position: absolute;
+  width: calc(var(--u) * 150);
+  max-width: 78cqw;
+  z-index: 30;
+  animation: box-in 140ms steps(3);
+}
+@keyframes box-in {
+  0% {
+    transform: scale(0.6, 0.2);
+  }
+  50% {
+    transform: scale(1.02, 0.8);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+.dialogue__name {
+  font-family: "Press Start 2P", monospace;
+  font-size: var(--fs-sm);
+  color: #7d4f26;
+  margin-bottom: calc(var(--u) * 3);
+  letter-spacing: 0;
+}
+.dialogue__text {
+  font-size: var(--fs);
+  white-space: pre-line;
+  line-height: 1.45;
+  min-height: calc(var(--u) * 18);
+  word-break: break-word;
+}
+.dialogue__tail {
+  position: absolute;
+  bottom: calc(var(--u) * -8);
+  width: calc(var(--u) * 9);
+  image-rendering: pixelated;
+}
+.dialogue__next {
+  position: absolute;
+  right: calc(var(--u) * 3);
+  bottom: calc(var(--u) * 2);
+  width: calc(var(--u) * 7);
+  animation: blink 700ms steps(1) infinite;
+}
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ================= buttons ================= */
+.btn {
+  font-family: "Press Start 2P", monospace;
+  font-size: var(--fs-sm);
+  color: #2b1a10;
+  background: #c9a86a;
+  border: 0;
+  padding: calc(var(--u) * 3) calc(var(--u) * 5);
+  cursor: pointer;
+  image-rendering: pixelated;
+  box-shadow: inset calc(var(--u) * -1) calc(var(--u) * -1) 0 0 #8a6a3a,
+    inset var(--u) var(--u) 0 0 #efd9a3, 0 0 0 var(--u) #2b1a10;
+  transition: none;
+}
+.btn:hover {
+  background: #e0be7c;
+}
+.btn:active {
+  transform: translate(var(--u), var(--u));
+  box-shadow: inset var(--u) var(--u) 0 0 #8a6a3a, 0 0 0 var(--u) #2b1a10;
+}
+.btn--sm {
+  padding: calc(var(--u) * 2) calc(var(--u) * 3);
+}
+.btn--ghost {
+  background: #3b2f52;
+  color: #f6e7c3;
+  box-shadow: inset calc(var(--u) * -1) calc(var(--u) * -1) 0 0 #241a38,
+    inset var(--u) var(--u) 0 0 #5b4a7d, 0 0 0 var(--u) #0f0a1a;
+}
+.btn--ghost:hover {
+  background: #4d3f6b;
+}
+
+/* ================= HUD ================= */
+.hud-top {
+  position: absolute;
+  top: calc(var(--u) * 6);
+  left: calc(var(--u) * 6);
+  right: calc(var(--u) * 6);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: calc(var(--u) * 4);
+  z-index: 20;
+}
+.plaque {
+  font-family: "Press Start 2P", monospace;
+  font-size: var(--fs);
+  line-height: 1.6;
+  padding: calc(var(--u) * 4) calc(var(--u) * 6);
+}
+.plaque small {
+  display: block;
+  font-family: "Silkscreen", monospace;
+  font-size: var(--fs-sm);
+  color: #ffd9a0;
+  margin-top: calc(var(--u) * 2);
+}
+.hud-btns {
+  display: flex;
+  gap: calc(var(--u) * 3);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.hint {
+  position: absolute;
+  bottom: calc(var(--u) * 4);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--fs-sm);
+  color: #f6e7c3;
+  background: rgba(12, 8, 20, 0.72);
+  padding: calc(var(--u) * 2) calc(var(--u) * 5);
+  box-shadow: 0 0 0 var(--u) #0f0a1a, 0 0 0 calc(var(--u) * 2) #c9a86a;
+  white-space: nowrap;
+  z-index: 20;
+}
+
+/* ================= modal ================= */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  background-color: rgba(8, 5, 16, 0.5);
+  background-image: repeating-conic-gradient(rgba(8, 5, 16, 0.55) 0 25%, transparent 0 50%);
+  background-size: calc(var(--u) * 2) calc(var(--u) * 2);
+}
+.panel {
+  width: calc(var(--u) * 400);
+  max-width: 90cqw;
+  max-height: 84cqh;
+  display: flex;
+  flex-direction: column;
+  animation: box-in 160ms steps(3);
+}
+.panel__title {
+  font-family: "Press Start 2P", monospace;
+  font-size: var(--fs);
+  text-align: center;
+  color: #ffd97a;
+  padding-bottom: calc(var(--u) * 3);
+  border-bottom: var(--u) solid #c9a86a;
+  margin-bottom: calc(var(--u) * 4);
+  letter-spacing: 0;
+}
+.panel__body {
+  display: flex;
+  gap: calc(var(--u) * 4);
+  min-height: 0;
+  flex: 1;
+}
+.panel__list {
+  width: calc(var(--u) * 118);
+  flex: none;
+  overflow-y: auto;
+  padding-right: calc(var(--u) * 2);
+  border-right: var(--u) dashed #5b4a7d;
+}
+.panel__item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  color: #cbbde6;
+  font-family: "Silkscreen", monospace;
+  font-size: var(--fs-sm);
+  padding: calc(var(--u) * 2);
+  cursor: pointer;
+  line-height: 1.4;
+}
+.panel__item:hover {
+  color: #fff;
+  background: #33284d;
+}
+.panel__item--on {
+  color: #ffd97a;
+  background: #3b2f52;
+}
+.panel__item span {
+  display: block;
+  color: #8f82ad;
+  font-size: max(5px, calc(var(--u) * 3));
+}
+.panel__content {
+  flex: 1;
+  overflow-y: auto;
+  min-width: 0;
+}
+.panel__tag {
+  display: inline-block;
+  font-family: "Press Start 2P", monospace;
+  font-size: max(5px, calc(var(--u) * 3));
+  padding: calc(var(--u) * 1.5) calc(var(--u) * 2);
+  background: #c9503d;
+  color: #ffeec9;
+  margin-bottom: calc(var(--u) * 3);
+}
+.panel__tag--info {
+  background: #2f6b8f;
+}
+.panel__tag--event {
+  background: #5b8f2f;
+}
+.panel__h {
+  font-family: "Press Start 2P", monospace;
+  font-size: var(--fs);
+  color: #ffd97a;
+  line-height: 1.5;
+  margin: 0 0 calc(var(--u) * 2);
+}
+.panel__date {
+  font-size: var(--fs-sm);
+  color: #9d8fbd;
+  margin-bottom: calc(var(--u) * 4);
+}
+.panel__text {
+  font-size: var(--fs);
+  line-height: 1.6;
+  color: #f0e6d2;
+  white-space: pre-line;
+}
+.panel__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: calc(var(--u) * 3);
+  margin-top: calc(var(--u) * 4);
+  padding-top: calc(var(--u) * 3);
+  border-top: var(--u) solid #5b4a7d;
+}
+
+/* pixel scrollbars */
+.panel__list::-webkit-scrollbar,
+.panel__content::-webkit-scrollbar {
+  width: calc(var(--u) * 3);
+}
+.panel__list::-webkit-scrollbar-track,
+.panel__content::-webkit-scrollbar-track {
+  background: #1a1329;
+}
+.panel__list::-webkit-scrollbar-thumb,
+.panel__content::-webkit-scrollbar-thumb {
+  background: #c9a86a;
+}
+
+/* ================= misc ================= */
+.badge {
+  position: absolute;
+  font-family: "Press Start 2P", monospace;
+  font-size: max(5px, calc(var(--u) * 3));
+  background: #c9503d;
+  color: #fff;
+  padding: calc(var(--u) * 1) calc(var(--u) * 1.5);
+  box-shadow: 0 0 0 var(--u) #2b1a10;
+}
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 calc(var(--u) * 30) rgba(6, 4, 12, 0.35);
+}
+@media (max-width: 700px) {
+  .panel__list {
+    display: none;
+  }
+}

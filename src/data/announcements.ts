@@ -1,0 +1,40 @@
+import type { Announcement } from "../components/AnnouncementPanel";
+
+/** Baked-in copy of public/data/announcements.json (the JSON overrides this at runtime). */
+export const ANNOUNCEMENTS: Announcement[] = [
+  {
+    id: "a1",
+    title: "CAPYBARA COVE IS OPEN",
+    date: "August 13, 2026",
+    tag: "NEWS",
+    body: "The floating cliffs of Capybara Cove are officially open to visitors!\n\nWander the grass ledges, poke the mossy rocks, and say hello to Yuzu, the resident capybara. Every object in this world can be clicked — a few of them even talk back.\n\nNew notices are pinned to this board whenever something happens in the Cove.",
+  },
+  {
+    id: "a2",
+    title: "SKY LANTERN FESTIVAL",
+    date: "August 20, 2026",
+    tag: "EVENT",
+    body: "When the sun dips behind the far mesa, every lantern on the cliff is lit at once.\n\nClick a lantern (or the time button in the corner) to swing the world into DUSK or NIGHT and watch the lamps glow while the fireflies come out.\n\nBring warm bread. Yuzu insists.",
+  },
+  {
+    id: "a3",
+    title: "WORLD UPDATE 1.4 — WINDY CLIFFS",
+    date: "September 02, 2026",
+    tag: "UPDATE",
+    body: "PATCH NOTES\n\n+ Added drifting parallax cloud layers\n+ Grass now sways in the wind\n+ Tree canopies react to gusts\n+ Fireflies added to the night cycle\n+ Capybara blink animation restored\n- Removed one (1) suspiciously square cloud",
+  },
+  {
+    id: "a4",
+    title: "LOST & FOUND CHEST",
+    date: "September 14, 2026",
+    tag: "NEWS",
+    body: "A wooden chest washed up on the eastern ledge. So far it contains:\n\n- three acorns\n- a slightly damp map\n- someone's left boot\n\nIf any of this belongs to you, click the chest and shout. Yuzu will pretend not to hear you.",
+  },
+  {
+    id: "a5",
+    title: "BUILD YOUR OWN LEDGE",
+    date: "October 01, 2026",
+    tag: "EVENT",
+    body: "Applications are open for a plot on the second floating island.\n\nRequirements:\n1. A tolerance for heights\n2. At least one plant\n3. Willingness to feed a capybara\n\nSpeak to the signpost near the campfire to register your interest.",
+  },
+];
