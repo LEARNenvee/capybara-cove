@@ -1,51 +1,38 @@
+
 [
   {
     "id": "a1",
-    "title": "ORAL EXAM — PURPOSIVE COMMUNICATION",
-    "date": "August 19, 2026",
-    "tag": "EXAM",
-    "body": "Oral examination tomorrow.\n\nCoverage: Modules 7–11\n\nPrepare for the oral discussion and review the assigned modules.\n\nReminder: bring a PINK PEN for this exam."
+    "title": "CAPYBARA COVE IS OPEN",
+    "date": "August 13, 2026",
+    "tag": "NEWS",
+    "body": "The floating cliffs of Capybara Cove are officially open to visitors!\n\nWander the grass ledges, poke the mossy rocks, and say hello to Yuzu, the resident capybara. Every object in this world can be clicked — a few of them even talk back.\n\nNew notices are pinned to this board whenever something happens in the Cove."
   },
   {
     "id": "a2",
-    "title": "MMW QUIPPER QUIZ",
-    "date": "August 19, 2026",
-    "tag": "QUIZ",
-    "body": "Quipper Quiz due tomorrow for Mathematics in the Modern World.\n\nReview the required lessons and topics before taking the quiz."
+    "title": "SKY LANTERN FESTIVAL",
+    "date": "August 20, 2026",
+    "tag": "EVENT",
+    "body": "When the sun dips behind the far mesa, every lantern on the cliff is lit at once.\n\nSwitch the world to DUSK or NIGHT with the time button in the top-right corner to watch the lanterns glow and the fireflies come out.\n\nBring warm bread. Yuzu insists."
   },
   {
     "id": "a3",
-    "title": "TOPICS TO REVIEW",
-    "date": "August 19, 2026",
-    "tag": "REVIEW",
-    "body": "Living in the IT Era\n- Review the latest lessons and discussions.\n\nAutomation & Internet of Things (IoT)\n- Review the concepts, applications, and important discussions.\n\nLesson 2 — Current Trends & Emerging Technologies\n- Current trends in technology\n- Emerging technologies\n\nLesson 1 — Digital Technology & Social Change\n- Digital technology\n- Technology and social change\n- Effects of digital technology on society\n\nChapter 7 — Layout & Composition\n- Layout principles\n- Composition\n- Proper arrangement of design elements\n\nLesson 6 — IT Culture & Society\n- Information technology and culture\n- Relationship between IT and society\n\nGraphic Design & Fundamentals\n- Review the latest discussion and fundamental concepts.\n- Reminder: ask Sir Kim to send the criteria/rubric for the brochure-making activity."
+    "title": "WORLD UPDATE 1.4 — WINDY CLIFFS",
+    "date": "September 02, 2026",
+    "tag": "UPDATE",
+    "body": "PATCH NOTES\n\n+ Added drifting parallax cloud layers\n+ Grass now sways in the wind\n+ Tree canopies react to gusts\n+ Fireflies added to the night cycle\n+ Capybara blink animation restored\n- Removed one (1) suspiciously square cloud"
   },
   {
     "id": "a4",
-    "title": "EXAM SCHEDULE — AUGUST 23",
-    "date": "August 23, 2026",
-    "tag": "SCHEDULE",
-    "body": "PATHFIT\nNSTP"
+    "title": "LOST & FOUND CHEST",
+    "date": "September 14, 2026",
+    "tag": "NEWS",
+    "body": "A wooden chest washed up on the eastern ledge. So far it contains:\n\n- three acorns\n- a slightly damp map\n- someone's left boot\n\nIf any of this belongs to you, click the chest and shout. Yuzu will pretend not to hear you."
   },
   {
     "id": "a5",
-    "title": "EXAM SCHEDULE — AUGUST 24 (MONDAY)",
-    "date": "August 24, 2026",
-    "tag": "SCHEDULE",
-    "body": "Purposive Communication\nLiving in the IT Era\nMMW — Set A"
-  },
-  {
-    "id": "a6",
-    "title": "EXAM SCHEDULE — AUGUST 25",
-    "date": "August 25, 2026",
-    "tag": "SCHEDULE",
-    "body": "MMW — Set B"
-  },
-  {
-    "id": "a7",
-    "title": "IMPORTANT REMINDERS",
-    "date": "August 19, 2026",
-    "tag": "REMINDER",
-    "body": "- Bring a PINK PEN for the Purposive Communication examination.\n- Review all listed topics before the examinations.\n- Prepare for the Purposive Communication oral examination covering Modules 7–11.\n- Complete the MMW Quipper Quiz.\n- Remind Sir Kim to send the brochure-making criteria/rubric.\n- Keep track of the examination schedule and prepare accordingly."
+    "title": "BUILD YOUR OWN LEDGE",
+    "date": "October 01, 2026",
+    "tag": "EVENT",
+    "body": "Applications are open for a plot on the second floating island.\n\nRequirements:\n1. A tolerance for heights\n2. At least one plant\n3. Willingness to feed a capybara\n\nSpeak to the signpost near the campfire to register your interest."
   }
 ]
